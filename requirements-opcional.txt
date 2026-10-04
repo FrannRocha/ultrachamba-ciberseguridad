@@ -1,0 +1,39 @@
+# =============================================================================
+#  ULTRA CHAMBA — ciberseguridad · dependencias OPCIONALES (Gmail y Drive)
+#
+#  NO hacen falta para recolectar, clasificar, verificar ni usar el panel. El
+#  nucleo funciona entero sin ellas, y por eso viven aparte de
+#  `requirements.txt`: quien no vaya a conectar su cuenta de Google no tiene
+#  por que instalar veinte paquetes mas.
+#
+#  Instalas esto SOLO si quieres que el sistema:
+#    - deje borradores en TU Gmail y lea si te contestaron (correo_gmail.py,
+#      seguimiento.py, tramites.py);
+#    - suba el corpus a TU Google Drive (sincronizar_drive.py).
+#
+#      pip install -r requirements-opcional.txt
+#
+#  Si NO las instalas, esos modulos fallan con ImportError al usarlos. El resto
+#  del sistema ni se entera.
+#
+#  Ademas de las librerias necesitas TUS PROPIAS credenciales OAuth de
+#  escritorio, descargadas de Google Cloud Console y guardadas en
+#  `app/datos/credenciales_drive.json` (ignorado por Git). Ver README §5.3.
+#
+#  Probado: instalado en el `.venv` de esta copia con Python 3.12.3 en Windows
+#  el 14-sep-2026; `pip check` sin conflictos y los cuatro modulos importan.
+# =============================================================================
+
+# Autenticacion OAuth: la usan correo_gmail.py y sincronizar_drive.py
+# (google.auth.transport.requests, google.oauth2.credentials).
+google-auth==2.58.0
+
+# El flujo de consentimiento de escritorio (InstalledAppFlow).
+google-auth-oauthlib==1.4.1
+
+# El cliente de las APIs de Gmail y Drive (googleapiclient.discovery.build).
+google-api-python-client==2.200.0
+
+# `google-auth-httplib2` NO se fija aqui a proposito: entra sola como
+# dependencia de google-api-python-client (se resolvio la 0.4.2). Fijarla por
+# nuestra cuenta solo serviria para pelearnos con esa resolucion mas adelante.

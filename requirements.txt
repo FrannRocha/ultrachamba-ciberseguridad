@@ -1,0 +1,46 @@
+# =============================================================================
+#  ULTRA CHAMBA — ciberseguridad · dependencias
+#
+#  Probado con Python 3.12.3 en Windows, sobre un `.venv` propio de esta
+#  carpeta. Las versiones son las que se instalaron y se ejercitaron aqui:
+#  no estan copiadas de otro proyecto.
+#
+#      python -m venv .venv
+#      .venv\Scripts\activate          (Windows)
+#      source .venv/bin/activate       (Linux / macOS)
+#      pip install -r requirements.txt
+# =============================================================================
+
+# --- Cliente HTTP ------------------------------------------------------------
+# `requests` lo usa nucleo.py (sesion con reintentos) y directorio.py.
+requests==2.34.2
+# urllib3 se usa de forma explicita: nucleo.py importa Retry para la politica
+# de reintentos, asi que se fija aunque tambien sea dependencia de requests.
+urllib3==2.7.0
+# `httpx` lo usan red.py (descargas concurrentes), fuentes_indeed.py,
+# fuentes_cursos.py, cursos.py y medir_verificacion.py.
+httpx==0.28.1
+
+# --- Parseo de HTML ----------------------------------------------------------
+# BeautifulSoup lo usan excavadora.py, fuentes_linkedin.py, fuentes_mexico.py
+# y fuentes_ats_extra.py.
+beautifulsoup4==4.15.0
+# lxml NO es opcional aunque no se importe por su nombre: esos modulos llaman a
+# BeautifulSoup(html, "lxml"). Sin lxml, bs4 lanza FeatureNotFound y esas
+# fuentes devuelven cero sin un error visible — un fallo silencioso.
+lxml==6.1.3
+
+
+# =============================================================================
+#  OPCIONAL — integraciones de Google (Gmail y Drive)
+#  ---------------------------------------------------------------------------
+#  Estan en un archivo aparte, `requirements-opcional.txt`, con sus versiones
+#  fijadas y probadas:
+#
+#      pip install -r requirements-opcional.txt
+#
+#  No van aqui a proposito: el nucleo --recolectar, clasificar, verificar y el
+#  panel-- funciona entero sin ellas. Solo hacen falta si quieres borradores en
+#  TU Gmail o subir el corpus a TU Drive, y ademas de las librerias necesitas
+#  tus propias credenciales OAuth. Ver README §5.3 y `.env.example`.
+# =============================================================================

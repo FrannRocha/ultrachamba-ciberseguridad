@@ -1,0 +1,72 @@
+# =============================================================================
+#  ULTRA CHAMBA — ciberseguridad
+#  Se escribe desde cero (no se hereda el .gitignore del proyecto original).
+#  Regla: lo que se pueda regenerar, y TODO lo que sea credencial o dato
+#  personal, se queda fuera del repositorio.
+# =============================================================================
+
+# --- Entorno y artefactos de Python ------------------------------------------
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Configuracion local ------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# --- Credenciales y tokens: NUNCA al repositorio ------------------------------
+# El archivo de credenciales OAuth de escritorio y los tokens dan acceso a la
+# cuenta de Google de quien los genere. Se cubren por nombre Y por patron.
+credenciales_drive.json
+client_secret*.json
+*apps.googleusercontent.com.json
+token_*.json
+*_token.json
+permitir_envio.json
+*.pem
+*.key
+*.p12
+
+# --- Datos locales: base, respaldos, caches y registros -----------------------
+# app/datos/ la crea el propio codigo al arrancar (nucleo.DATOS): no hace falta
+# versionarla, y dentro viven la base, los tokens y los logs.
+app/datos/
+*.db
+*.sqlite3
+*.respaldo-*.db
+*.log
+
+# --- Derivados que el codigo regenera -----------------------------------------
+dashboard.html
+vacantes.json
+vacantes_todas_analizadas.json
+estadisticas.json
+auditoria_decisiones.json
+corpus-notebooklm/
+
+# Boveda de Obsidian generada por app/generar_obsidian*.py
+vacantes/
+sistema/
+guias/
+.obsidian/
+
+# --- Datos personales ---------------------------------------------------------
+# El CV y cualquier documento personal no entran al repositorio.
+*.pdf
+*.docx
+perfil/
+
+# --- Editor y sistema operativo -----------------------------------------------
+.claude/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
